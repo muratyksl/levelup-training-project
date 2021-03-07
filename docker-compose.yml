@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_DB=express-ts
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  app:
+    build:
+      context: api
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./api/src:/app/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_DB=express-ts
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
