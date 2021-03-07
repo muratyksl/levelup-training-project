@@ -1,11 +1,12 @@
 # levelup-training-project
+Find best trainer for you with levelup
 
-#To start project 
+##To run project localy
 `docker-compose up`
 
-#used techs
-node
-express
-typescript
-postgresql
-typeOrm
+##Used techs
+- node
+- express
+- typescript
+- postgresql
+- typeOrm
