@@ -11,6 +11,11 @@ import {
 @Route("customers")
 @Tags("Customer")
 export default class CustomerController {
+  @Get("/:id")
+  public async getCustomer(@Path() id: string): Promise<Customer | null> {
+    return getCustomer(Number(id));
+  }
+
   @Get("/")
   public async getCustomers(): Promise<Array<Customer>> {
     return getCustomers();
@@ -21,10 +26,5 @@ export default class CustomerController {
     @Body() body: ICustomerPayload
   ): Promise<Customer> {
     return createCustomer(body);
-  }
-
-  @Get("/:id")
-  public async getCustomer(@Path() id: string): Promise<Customer | null> {
-    return getCustomer(Number(id));
   }
 }

@@ -11,6 +11,11 @@ import {
 @Route("trainers")
 @Tags("Trainer")
 export default class TrainerController {
+  @Get("/:id")
+  public async getTrainer(@Path() id: string): Promise<Trainer | null> {
+    return getTrainer(Number(id));
+  }
+
   @Get("/")
   public async getTrainers(): Promise<Array<Trainer>> {
     return getTrainers();
@@ -19,10 +24,5 @@ export default class TrainerController {
   @Post("/")
   public async createTrainer(@Body() body: ITrainerPayload): Promise<Trainer> {
     return createTrainer(body);
-  }
-
-  @Get("/:id")
-  public async getTrainer(@Path() id: string): Promise<Trainer | null> {
-    return getTrainer(Number(id));
   }
 }
