@@ -1,4 +1,5 @@
 import express from "express";
+
 import CustomerController from "../controllers/customer.controller";
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.get("/:id", async (req, res) => {
   const controller = new CustomerController();
   const response = await controller.getCustomer(req.params.id);
   if (!response) res.status(404).send({ message: "No customer found" });
+  return res.send(response);
 });
 
 export default router;

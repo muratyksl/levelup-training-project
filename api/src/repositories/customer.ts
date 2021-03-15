@@ -7,6 +7,7 @@ export interface ICustomerPayload {
   email: string;
   height: number;
   weight: number;
+  trainerId?: number;
 }
 
 export const getCustomers = async (): Promise<Array<Customer>> => {

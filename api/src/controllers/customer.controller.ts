@@ -1,4 +1,5 @@
 import { Get, Route, Tags, Post, Body, Path } from "tsoa";
+
 import { Customer } from "../models";
 import {
   getCustomer,
@@ -7,7 +8,7 @@ import {
   getCustomers,
 } from "../repositories/customer";
 
-@Route("customer")
+@Route("customers")
 @Tags("Customer")
 export default class CustomerController {
   @Get("/")

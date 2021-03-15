@@ -2,6 +2,7 @@ import { Router } from "express";
 import PingController from "../controllers/ping";
 
 import customerRouter from "./customer.router";
+import trainerRouter from "./trainer.router";
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.get("/ping", async (_req, res) => {
 });
 
 router.use("/customers", customerRouter);
+router.use("/trainers", trainerRouter);
 
 export default router;
