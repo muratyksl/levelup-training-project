@@ -6,9 +6,9 @@ import trainerRouter from "./trainer.router";
 
 const router = Router();
 
-router.get("/ping", async (_req, res) => {
+router.get("/ping", async (_req, res, next) => {
   const controller = new PingController();
-  const response = await controller.getMessage();
+  const response = await controller.getMessage().catch(next);
   return res.send(response);
 });
 

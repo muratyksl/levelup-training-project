@@ -3,7 +3,7 @@ import { Trainer } from "../models";
 
 export interface ITrainerPayload {
   firstName: string;
-  lastname: string;
+  lastName: string;
   email: string;
   username: string;
 }

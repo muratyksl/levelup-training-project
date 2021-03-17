@@ -4,22 +4,22 @@ import TrainerController from "../controllers/trainer.controller";
 
 const router = express.Router();
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   const controller = new TrainerController();
-  const response = await controller.getTrainer(req.params.id);
+  const response = await controller.getTrainer(req.params.id).catch(next);
   if (!response) res.status(404).send({ message: "No trainer found" });
   return res.send(response);
 });
 
-router.get("/", async (_req, res) => {
+router.get("/", async (_req, res, next) => {
   const controller = new TrainerController();
-  const response = await controller.getTrainers();
+  const response = await controller.getTrainers().catch(next);
   return res.send(response);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   const controller = new TrainerController();
-  const response = await controller.createTrainer(req.body);
+  const response = await controller.createTrainer(req.body).catch(next);
   return res.send(response);
 });
 

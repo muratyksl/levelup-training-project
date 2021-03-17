@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 
 import Router from "./routes";
 import dbConfig from "./config/database";
+import { errorHandlerMiddleWare } from "./middlewares/errorHandler";
 
 const PORT = process.env.PORT || 8000;
 
@@ -25,6 +26,7 @@ app.use(
   })
 );
 app.use(Router);
+app.use(errorHandlerMiddleWare);
 
 createConnection(dbConfig)
   .then((_connection) => {
