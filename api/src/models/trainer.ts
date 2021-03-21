@@ -20,11 +20,14 @@ export class Trainer {
   @Column()
   lastName!: string;
 
-  @Column()
+  @Column({ type: "text", unique: true })
   email!: string;
 
   @Column()
   username!: string;
+
+  @Column({ type: "text", select: false })
+  password!: string;
 
   @OneToMany((_type) => Customer, (customer: Customer) => customer.trainer)
   customers!: Array<Customer>;

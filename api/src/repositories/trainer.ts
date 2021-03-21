@@ -1,11 +1,13 @@
 import { getRepository } from "typeorm";
 import { Trainer } from "../models";
+import { comparePassword, hashPassword } from "../utils/hashingUtils";
 
 export interface ITrainerPayload {
   firstName: string;
   lastName: string;
   email: string;
   username: string;
+  password: string;
 }
 
 export const getTrainers = async (): Promise<Array<Trainer>> => {
@@ -18,6 +20,12 @@ export const createTrainer = async (
 ): Promise<Trainer> => {
   const trainerRepository = getRepository(Trainer);
   const trainer = new Trainer();
+  let hashedPassword = await hashPassword(payload.password);
+  if (!hashedPassword) {
+    throw new Error("Password Creating Not Successful");
+  }
+  payload.password = hashedPassword;
+
   return trainerRepository.save({
     ...trainer,
     ...payload,
@@ -28,5 +36,24 @@ export const getTrainer = async (id: number): Promise<Trainer | null> => {
   const trainerRepository = getRepository(Trainer);
   const trainer = await trainerRepository.findOne({ id: id });
   if (!trainer) return null;
+  return trainer;
+};
+
+export const authenticateTrainer = async (
+  email: string,
+  password: string
+): Promise<Trainer | null> => {
+  const trainer = await getRepository(Trainer)
+    .createQueryBuilder("trainer")
+    .where({ email: email })
+    .addSelect("password")
+    .getOne();
+  if (!trainer) {
+    throw new Error("Authantication is failed");
+  }
+  let isPasswordTrue = await comparePassword(password, trainer?.password);
+  if (!isPasswordTrue) {
+    throw new Error("Authantication is failed. Wrong Password ");
+  }
   return trainer;
 };

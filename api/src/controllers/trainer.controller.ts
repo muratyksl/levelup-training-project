@@ -6,7 +6,13 @@ import {
   createTrainer,
   getTrainers,
   ITrainerPayload,
+  authenticateTrainer,
 } from "../repositories/trainer";
+
+interface ILoginInfo {
+  email: string;
+  password: string;
+}
 
 @Route("trainers")
 @Tags("Trainer")
@@ -21,8 +27,14 @@ export default class TrainerController {
     return getTrainers();
   }
 
-  @Post("/")
+  @Post("/register")
   public async createTrainer(@Body() body: ITrainerPayload): Promise<Trainer> {
     return createTrainer(body);
+  }
+
+  @Post("/login")
+  public async loginTrainer(@Body() body: ILoginInfo): Promise<Trainer | null> {
+    const { email, password } = body;
+    return authenticateTrainer(email, password);
   }
 }
