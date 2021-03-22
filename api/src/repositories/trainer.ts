@@ -46,12 +46,14 @@ export const authenticateTrainer = async (
   const trainer = await getRepository(Trainer)
     .createQueryBuilder("trainer")
     .where({ email: email })
-    .addSelect("password")
+    .addSelect("trainer.password")
     .getOne();
+  console.log("Authantication function started ", { trainer });
   if (!trainer) {
+    console.error("User con not found ");
     throw new Error("Authantication is failed");
   }
-  let isPasswordTrue = await comparePassword(password, trainer?.password);
+  let isPasswordTrue = await comparePassword(password, trainer.password);
   if (!isPasswordTrue) {
     throw new Error("Authantication is failed. Wrong Password ");
   }

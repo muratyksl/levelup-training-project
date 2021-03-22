@@ -12,6 +12,11 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   const controller = new TrainerController();
   const response = await controller.loginTrainer(req.body).catch(next);
+  if (!response) res.status(404).send({ message: "No trainer found" });
+  if (!(req.session && response)) {
+    throw new Error("Authantication failed");
+  }
+  req.session.email = response.email;
   return res.send(response);
 });
 

@@ -5,6 +5,8 @@ services:
       - POSTGRES_DB=express-ts
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis
   app:
     build:
       context: api
@@ -15,8 +17,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
     environment:
       - POSTGRES_DB=express-ts
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=db
+      - REDIS_HOST=redis
