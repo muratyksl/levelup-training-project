@@ -10,3 +10,4 @@ Find best trainer for you with levelup
 - typescript
 - postgresql
 - typeOrm
+- redis
