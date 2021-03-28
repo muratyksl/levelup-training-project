@@ -7,6 +7,11 @@ import {
   OneToMany,
 } from "typeorm";
 
+export enum UserRole {
+  ADMIN = "admin",
+  TRAINER = "trainer",
+}
+
 import { Customer } from "./customer";
 
 @Entity()
@@ -23,8 +28,15 @@ export class Trainer {
   @Column({ type: "text", unique: true })
   email!: string;
 
-  @Column()
+  @Column({ type: "text", unique: true })
   username!: string;
+
+  @Column({
+    type: "enum",
+    enum: UserRole,
+    default: UserRole.TRAINER,
+  })
+  role!: UserRole;
 
   @Column({ type: "text", select: false })
   password!: string;

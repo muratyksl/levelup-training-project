@@ -19,11 +19,9 @@ const RedisStore = connectRedis(session);
 const redisClient = redis.createClient({ host: process.env.REDIS_HOST });
 
 declare module "express-session" {
-  interface SessionData {
-    email: string;
-  }
   interface Session {
     email: string;
+    role: "admin" | "trainer" | "customer";
   }
 }
 

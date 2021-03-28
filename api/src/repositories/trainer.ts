@@ -1,11 +1,13 @@
 import { getRepository } from "typeorm";
 import { Trainer } from "../models";
 import { comparePassword, hashPassword } from "../utils/hashingUtils";
+import { UserRole } from "../models/trainer";
 
 export interface ITrainerPayload {
   firstName: string;
   lastName: string;
   email: string;
+  role: UserRole;
   username: string;
   password: string;
 }
@@ -48,14 +50,14 @@ export const authenticateTrainer = async (
     .where({ email: email })
     .addSelect("trainer.password")
     .getOne();
-  console.log("Authantication function started ", { trainer });
+  console.log("Authentication function started ", { trainer });
   if (!trainer) {
     console.error("User con not found ");
-    throw new Error("Authantication is failed");
+    throw new Error("Authentication is failed");
   }
   let isPasswordTrue = await comparePassword(password, trainer.password);
   if (!isPasswordTrue) {
-    throw new Error("Authantication is failed. Wrong Password ");
+    throw new Error("Authentication is failed. Wrong Password ");
   }
   return trainer;
 };
