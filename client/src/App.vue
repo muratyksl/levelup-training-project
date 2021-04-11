@@ -12,7 +12,7 @@ export default defineComponent({
 </script>
 
 <style>
-@import "~@fontsource/roboto";
+
 *{
   margin: 0;
   padding: 0;

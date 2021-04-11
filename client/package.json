@@ -7,7 +7,6 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@fontsource/roboto": "^4.2.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",

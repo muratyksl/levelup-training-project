@@ -33,7 +33,7 @@ name: "AuthPage"
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  background-image: url("../../assets/img/1244788.jpg");
+  background-image: url("../../assets/img/1244788.jpeg");
   background-position: center;
   background-size: cover;
 }
