@@ -23,6 +23,9 @@ export class Customer {
   @Column()
   email!: string;
 
+  @Column({ type: "text", select: false })
+  password!: string;
+
   @Column()
   height!: number;
 

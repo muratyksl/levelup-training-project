@@ -1,11 +1,13 @@
 import { Get, Route, Tags, Post, Body, Path } from "tsoa";
 
 import { Customer } from "../models";
+import { ILoginInfo } from "./trainer.controller";
 import {
   getCustomer,
   createCustomer,
   ICustomerPayload,
   getCustomers,
+  authenticateCustomer,
 } from "../repositories/customer";
 
 @Route("customers")
@@ -21,7 +23,15 @@ export default class CustomerController {
     return getCustomers();
   }
 
-  @Post("/")
+  @Post("/login")
+  public async loginCustomer(
+    @Body() body: ILoginInfo
+  ): Promise<Customer | null> {
+    const { email, password } = body;
+    return authenticateCustomer(email, password);
+  }
+
+  @Post("/register")
   public async createCustomer(
     @Body() body: ICustomerPayload
   ): Promise<Customer> {

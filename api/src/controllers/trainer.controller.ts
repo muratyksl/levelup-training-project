@@ -9,7 +9,7 @@ import {
   authenticateTrainer,
 } from "../repositories/trainer";
 
-interface ILoginInfo {
+export interface ILoginInfo {
   email: string;
   password: string;
 }

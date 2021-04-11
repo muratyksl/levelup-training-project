@@ -13,6 +13,7 @@ router.post("/login", async (req, res, next) => {
     throw new Error("Authentication failed");
   }
   req.session.email = response.email;
+  req.session.role = response.role;
   return res.send(response);
 });
 
