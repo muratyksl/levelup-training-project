@@ -1,23 +1,25 @@
 <template>
-  <main id="auth-page-main">
-    <div class="admin-btn">
-      <button><router-link to="/auth/admin" style="color: white; text-decoration: none;">Eğitmen Girişi</router-link></button>
-    </div>
-    <div class="section">
-      <div class="section-logo">
-        <div class="logo">
-          <img src="../../assets/img/unnamed.png" alt="">
+  <div class="auth-section">
+    <main id="auth-page-main">
+      <div class="admin-btn">
+        <button><router-link to="/auth/admin" style="color: white; text-decoration: none;">Eğitmen Girişi</router-link></button>
+      </div>
+      <div class="section">
+        <div class="section-logo">
+          <div class="logo">
+            <img src="../../assets/img/unnamed.png" alt="">
+          </div>
+        </div>
+        <div class="section-inputs">
+          <div class="secenekler">
+            <h3 class="login"><router-link to="/auth/login" style="color: white; text-decoration: none;">Login</router-link></h3>
+            <h3 class="register"><router-link style="color: white; text-decoration: none;" to="/auth/register">Register</router-link></h3>
+          </div>
+          <router-view></router-view>
         </div>
       </div>
-      <div class="section-inputs">
-        <div class="secenekler">
-          <h3 class="login"><router-link to="/auth/login" style="color: white; text-decoration: none;">Login</router-link></h3>
-          <h3 class="register"><router-link style="color: white; text-decoration: none;" to="/auth/register">Register</router-link></h3>
-        </div>
-        <router-view></router-view>
-      </div>
-    </div>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -27,15 +29,17 @@ name: "AuthPage"
 </script>
 
 <style scoped>
+.auth-section{
+  background-image: url("../../assets/img/1244788.jpeg");
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+}
 #auth-page-main{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
-  background-image: url("../../assets/img/1244788.jpeg");
-  background-position: center;
-  background-size: cover;
 }
 .admin-btn{
   position:absolute;

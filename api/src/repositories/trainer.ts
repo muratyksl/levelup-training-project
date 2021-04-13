@@ -43,8 +43,21 @@ export const getTrainer = async (id: number): Promise<Trainer | null> => {
 
 export const authenticateTrainer = async (
   email: string,
-  password: string
-): Promise<Trainer | null> => {
+  pass: string
+): Promise<
+  Pick<
+    Trainer,
+    | "id"
+    | "firstName"
+    | "lastName"
+    | "email"
+    | "username"
+    | "role"
+    | "customers"
+    | "createdAt"
+    | "updatedAt"
+  >
+> => {
   const trainer = await getRepository(Trainer)
     .createQueryBuilder("trainer")
     .where({ email: email })
@@ -55,9 +68,10 @@ export const authenticateTrainer = async (
     console.error("User con not found ");
     throw new Error("Authentication is failed");
   }
-  let isPasswordTrue = await comparePassword(password, trainer.password);
+  let isPasswordTrue = await comparePassword(pass, trainer.password);
   if (!isPasswordTrue) {
     throw new Error("Authentication is failed. Wrong Password ");
   }
-  return trainer;
+  const { password, ...rest } = trainer;
+  return rest;
 };

@@ -49,5 +49,5 @@ export const router = createRouter({
 router.beforeEach((to, from, next) => {
   console.log("to is here ", to.fullPath.includes("/auth/"));
   if (!isAuth && !to.fullPath.includes("/auth/")) next("/auth/login");
-  next();
+  else next();
 });

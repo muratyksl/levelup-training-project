@@ -3,11 +3,11 @@
     <div class="inputlar">
       <div class="uyelik">
         <label class="lbl-user" for="email"><i class="fas fa-envelope"></i></label>
-        <input class="inputs" id="email" type="email" name="userEmail" placeholder="E-Mail Giriniz">
+        <input class="inputs" id="email" type="email" name="userEmail" placeholder="E-Mail Giriniz" autocomplete="email">
       </div>
       <div class="pass">
         <label class="lbl-password" for="password"><i class="fas fa-lock"></i></label>
-        <input class="inputs" id="password" type="password" name="password" placeholder="Şifrenizi Giriniz">
+        <input class="inputs" id="password" type="password" name="password" placeholder="Şifrenizi Giriniz" autocomplete="current-password">
       </div>
     </div>
     <div class="btns">

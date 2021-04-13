@@ -4,7 +4,7 @@ import { comparePassword, hashPassword } from "../utils/hashingUtils";
 
 export interface ICustomerPayload {
   firstName: string;
-  lastname: string;
+  lastName: string;
   email: string;
   height: number;
   weight: number;
