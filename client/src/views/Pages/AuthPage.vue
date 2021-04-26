@@ -30,8 +30,7 @@ name: "AuthPage"
 
 <style scoped>
 .auth-section{
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(21,18,142,1) 35%, rgba(0,71,85,1) 100%);
+  background-image: url("../../assets/img/loginbg.jpg");
   height: 100vh;
   background-position: center;
   background-size: cover;
