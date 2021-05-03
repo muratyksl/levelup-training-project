@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 export const getAuth = (req: Request, res: Response, next: NextFunction) => {
   const authToken = req.session.email;
   if (!authToken) {
+    console.log("auth token is not avaible");
     return res.status(401).json("Not authorized");
   }
   return next();

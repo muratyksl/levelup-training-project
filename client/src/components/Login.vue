@@ -3,11 +3,13 @@
     <div class="inputlar">
       <div class="uyelik">
         <label class="lbl-user" for="email"><i class="fas fa-envelope"></i></label>
-        <input class="inputs" id="email" type="email" name="userEmail" placeholder="E-Mail Giriniz" autocomplete="email">
+        <input class="inputs" id="email" type="email" name="userEmail" placeholder="E-Mail Giriniz"
+               autocomplete="email">
       </div>
       <div class="pass">
         <label class="lbl-password" for="password"><i class="fas fa-lock"></i></label>
-        <input class="inputs" id="password" type="password" name="password" placeholder="Şifrenizi Giriniz" autocomplete="current-password">
+        <input class="inputs" id="password" type="password" name="password" placeholder="Şifrenizi Giriniz"
+               autocomplete="current-password">
       </div>
     </div>
     <div class="btns">
@@ -19,13 +21,21 @@
 </template>
 
 <script>
+import {doCustomerLogin} from "../api/authCustomer";
+
 export default {
-name: "Login"
+  name: "Login",
+  mounted() {
+    doCustomerLogin({email:"string",password: "string"}).then(x=>{
+      console.log(x)
+    })
+    console.log("hello world 22222")
+  }
 }
 </script>
 
 <style scoped>
-.inputs{
+.inputs {
   outline: none;
   border: 2px solid white;
   padding: 15px 20px 15px 60px;
@@ -39,10 +49,12 @@ name: "Login"
   position: relative;
 
 }
-.inputs:hover{
+
+.inputs:hover {
   background-color: rgba(255, 255, 255, 0.25);
 }
-.lbl-user,.lbl-password,.lbl-kod{
+
+.lbl-user, .lbl-password {
   color: white;
   font-size: 1.5rem;
   position: absolute;
@@ -50,7 +62,7 @@ name: "Login"
   margin-left: 25px;
 }
 
-.giris-btn{
+.giris-btn {
   width: 400px;
   padding: 20px 20px;
   border-radius: 10px;
@@ -62,10 +74,12 @@ name: "Login"
   font-size: 1.4rem;
   font-weight: bold;
 }
-.giris-btn:active{
+
+.giris-btn:active {
   background-color: rgba(255, 255, 255, 0.7);
   color: darkred;
 }
+
 input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: rgba(255, 255, 255, 0.747);
 }

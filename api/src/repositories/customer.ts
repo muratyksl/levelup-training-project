@@ -42,14 +42,20 @@ export const authenticateCustomer = async (
   email: string,
   password: string
 ): Promise<Customer | null> => {
-  const customer = await getRepository(Customer)
-    .createQueryBuilder("customer")
-    .where({ email: email })
-    .addSelect("customer.password")
-    .getOne();
-  if (!customer) throw new Error("Authentication is failed");
-  let isPasswordTrue = await comparePassword(password, customer.password);
-  if (!isPasswordTrue)
-    throw new Error("Authentication is failed. Wrong Password");
-  return customer;
+  try {
+    const customer = await getRepository(Customer)
+      .createQueryBuilder("customer")
+      .where({ email: email })
+      .addSelect("customer.password")
+      .getOne();
+    if (!customer)
+      throw new Error("Authentication is failed customer not founded");
+    let isPasswordTrue = await comparePassword(password, customer.password);
+    if (!isPasswordTrue)
+      throw new Error("Authentication is failed. Wrong Password");
+    return customer;
+  } catch (e) {
+    console.error("login failed ", e);
+    return null;
+  }
 };

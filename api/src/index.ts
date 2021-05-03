@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
+import cors from "cors";
 
 import Router from "./routes";
 import dbConfig from "./config/database";
@@ -24,7 +25,7 @@ declare module "express-session" {
     role: "admin" | "trainer" | "customer";
   }
 }
-
+app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 app.use(morgan("tiny"));

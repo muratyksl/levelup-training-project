@@ -8,9 +8,9 @@ const router = express.Router();
 router.post("/login", async (req, res, next) => {
   const controller = new TrainerController();
   const response = await controller.loginTrainer(req.body).catch(next);
-  if (!response) res.status(404).send({ message: "No trainer found" });
+  if (!response) return res.status(404).send({ message: "No trainer found" });
   if (!(req.session && response)) {
-    throw new Error("Authentication failed");
+    return res.status(401).send({ message: "Auth failed" });
   }
   req.session.email = response.email;
   req.session.role = response.role;
