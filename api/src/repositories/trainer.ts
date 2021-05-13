@@ -3,12 +3,15 @@ import { Trainer } from "../models";
 import { comparePassword, hashPassword } from "../utils/hashingUtils";
 import { UserRole } from "../models/trainer";
 
-export interface ITrainerPayload {
+export interface ITrainer {
   firstName: string;
   lastName: string;
   email: string;
   role: UserRole;
   username: string;
+}
+
+export interface ITrainerPayload extends ITrainer {
   password: string;
 }
 
@@ -44,20 +47,7 @@ export const getTrainer = async (id: number): Promise<Trainer | null> => {
 export const authenticateTrainer = async (
   email: string,
   pass: string
-): Promise<
-  Pick<
-    Trainer,
-    | "id"
-    | "firstName"
-    | "lastName"
-    | "email"
-    | "username"
-    | "role"
-    | "customers"
-    | "createdAt"
-    | "updatedAt"
-  >
-> => {
+): Promise<ITrainer> => {
   const trainer = await getRepository(Trainer)
     .createQueryBuilder("trainer")
     .where({ email: email })

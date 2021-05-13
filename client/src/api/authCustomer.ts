@@ -1,6 +1,10 @@
 import request from "../utils/request";
 import { AxiosResponse } from "axios";
-import { ICustomer, ILoginInfo } from "../types/customerTypes";
+import {
+  ICustomer,
+  ICustomerPayload,
+  ILoginInfo,
+} from "../types/customerTypes";
 
 export const doCustomerLogin = ({
   email,
@@ -10,4 +14,10 @@ export const doCustomerLogin = ({
     email: email,
     password: password,
   });
+};
+
+export const registerCustomer = (
+  payload: ICustomerPayload
+): Promise<AxiosResponse<ICustomer>> => {
+  return request.post<ICustomer>("/customers/register", payload);
 };

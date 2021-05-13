@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="btns">
-      <button class="giris-btn">Giriş Yap</button>
+      <button class="giris-btn" @click.prevent="customerLogin()">Giriş Yap</button>
     </div>
   </form>
   <br>
@@ -21,14 +21,29 @@
 </template>
 
 <script>
-import {doCustomerLogin} from "../api/authCustomer";
+import {mapActions} from "vuex";
 
 export default {
   name: "Login",
+  data(){
+    return{
+      email:"",
+      password:"",
+    }
+  },
+  methods:{
+    ...mapActions({
+      loginCustomer: 'loginCustomer'
+    }),
+    customerLogin(){
+      this.loginCustomer({email:this.email,password:this.password}).catch(err=>{
+        console.error("Login is failed",{error:err});
+        const errorMessage= err.response.data?.message||"Giriş başarısız"
+        this.$toast(errorMessage);
+      })
+    }
+  },
   mounted() {
-    doCustomerLogin({email:"string",password: "string"}).then(x=>{
-      console.log(x)
-    })
     console.log("hello world 22222")
   }
 }

@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
+import { store } from "./store/store";
+
 // 1. Define route components.
 // These can be imported from other files
 import Layout from "./views/Layout.vue";
@@ -11,7 +13,6 @@ import Register from "./components/Register.vue";
 // 2. Define some routes
 // Each route should map to a component.
 // We'll talk about nested routes later.
-let isAuth = false;
 const routes = [
   {
     path: "/auth",
@@ -48,6 +49,7 @@ export const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   console.log("to is here ", to.fullPath.includes("/auth/"));
+  let isAuth = store.state.authCustomer.id;
   if (!isAuth && !to.fullPath.includes("/auth/")) next("/auth/login");
   else next();
 });

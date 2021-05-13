@@ -6,8 +6,8 @@ export interface ICustomerPayload {
   firstName: string;
   lastName: string;
   email: string;
-  height: number;
-  weight: number;
+  height?: number;
+  weight?: number;
   trainerId?: number;
   password: string;
 }
@@ -26,8 +26,8 @@ export const createCustomer = async (
   if (!hashedPassword) throw new Error("Password Creating Not Successful");
   payload.password = hashedPassword;
   return customerRepository.save({
-    ...customer,
     ...payload,
+    ...customer,
   });
 };
 

@@ -1,18 +1,44 @@
 import { State } from "vue";
 import { createStore } from "vuex";
 
+import { router } from "../router";
+import { ICustomerPayload, ILoginInfo } from "../types/customerTypes";
+import { doCustomerLogin, registerCustomer } from "../api/authCustomer";
+
 // Create a new store instance.
 export const store = createStore({
-  state() {
+  state(): State {
     return {
-      count: 0,
-      number: 5,
+      authCustomer: {
+        id: 0,
+        firstName: "",
+        lastName: "",
+        email: "",
+        height: 0,
+        weight: 0,
+        trainerId: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     };
   },
   mutations: {
-    increment(state: State) {
-      state.count++;
+    LOGIN_CUSTOMER: (state: State, payload) => {
+      state.authCustomer = payload;
     },
   },
-  actions: {},
+  actions: {
+    async loginCustomer({ commit }, payload: ILoginInfo) {
+      return doCustomerLogin(payload).then((res) => {
+        commit("LOGIN_CUSTOMER", res.data);
+        router.push("/");
+      });
+    },
+    async registerCustomer({ commit }, payload: ICustomerPayload) {
+      return registerCustomer(payload).then((res) => {
+        commit("LOGIN_CUSTOMER", res.data);
+        router.push("/");
+      });
+    },
+  },
 });

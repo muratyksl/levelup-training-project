@@ -7,6 +7,7 @@ import {
   getTrainers,
   ITrainerPayload,
   authenticateTrainer,
+  ITrainer,
 } from "../repositories/trainer";
 
 export interface ILoginInfo {
@@ -33,7 +34,9 @@ export default class TrainerController {
   }
 
   @Post("/login")
-  public async loginTrainer(@Body() body: ILoginInfo): Promise<Trainer | null> {
+  public async loginTrainer(
+    @Body() body: ILoginInfo
+  ): Promise<ITrainer | null> {
     const { email, password } = body;
     return authenticateTrainer(email, password);
   }

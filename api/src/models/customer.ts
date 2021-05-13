@@ -20,17 +20,17 @@ export class Customer {
   @Column()
   lastName!: string;
 
-  @Column()
+  @Column({ unique: true })
   email!: string;
 
   @Column({ type: "text", select: false })
   password!: string;
 
-  @Column()
-  height!: number;
+  @Column({ nullable: true })
+  height?: number;
 
-  @Column()
-  weight!: number;
+  @Column({ nullable: true })
+  weight?: number;
 
   @Column({ nullable: true })
   trainerId!: number;

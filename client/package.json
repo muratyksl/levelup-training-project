@@ -12,6 +12,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "axios": "^0.21.1",
     "vue": "^3.0.5",
+    "vue-dk-toast": "^2.2.1",
     "vue-router": "4",
     "vuex": "^4.0.0"
   },
