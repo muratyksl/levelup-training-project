@@ -25,7 +25,12 @@ declare module "express-session" {
     role: "admin" | "trainer" | "customer";
   }
 }
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.static("public"));
 app.use(morgan("tiny"));
@@ -47,6 +52,7 @@ app.use(
       client: redisClient,
       disableTouch: true,
     }),
+    //todo this will change in production
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // one day
       httpOnly: true,

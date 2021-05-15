@@ -10,6 +10,7 @@ export const doCustomerLogin = ({
   email,
   password,
 }: ILoginInfo): Promise<AxiosResponse<ICustomer>> => {
+  console.log("email password", { email, password });
   return request.post<ICustomer>("/customers/login", {
     email: email,
     password: password,

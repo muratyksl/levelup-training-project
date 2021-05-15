@@ -34,7 +34,7 @@ router.get("/:id", checkRole("trainer"), async (req, res, next) => {
   return res.send(response);
 });
 
-router.get("/", checkRole("trainer"), async (_req, res, next) => {
+router.get("/", async (_req, res, next) => {
   const controller = new CustomerController();
   const response = await controller.getCustomers().catch(next);
   return res.send(response);

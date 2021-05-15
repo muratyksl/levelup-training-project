@@ -22,6 +22,11 @@ router.use(getAuth);
 router.post("/register", checkRole("admin"), async (req, res, next) => {
   const controller = new TrainerController();
   const response = await controller.createTrainer(req.body).catch(next);
+  if (!(req.session && response)) {
+    return res.status(401).send({ message: "Auth failed" });
+  }
+  req.session.email = response.email;
+  req.session.role = response.role;
   return res.send(response);
 });
 

@@ -2,51 +2,76 @@
   <form>
     <div class="inputlar">
       <div class="uyelik">
-        <label class="lbl-user" for="email"><i class="fas fa-envelope"></i></label>
-        <input class="inputs" id="email" type="email" name="userEmail" placeholder="E-Mail Giriniz"
-               autocomplete="email">
+        <label class="lbl-user" for="email"
+          ><i class="fas fa-envelope"></i
+        ></label>
+        <input
+          class="inputs"
+          id="email"
+          type="email"
+          name="userEmail"
+          placeholder="E-Mail Giriniz"
+          autocomplete="email"
+          v-model="email"
+        />
       </div>
       <div class="pass">
-        <label class="lbl-password" for="password"><i class="fas fa-lock"></i></label>
-        <input class="inputs" id="password" type="password" name="password" placeholder="Şifrenizi Giriniz"
-               autocomplete="current-password">
+        <label class="lbl-password" for="password"
+          ><i class="fas fa-lock"></i
+        ></label>
+        <input
+          class="inputs"
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Şifrenizi Giriniz"
+          autocomplete="current-password"
+          v-model="password"
+        />
       </div>
     </div>
     <div class="btns">
-      <button class="giris-btn" @click.prevent="customerLogin()">Giriş Yap</button>
+      <button class="giris-btn" @click.prevent="customerLogin()">
+        Giriş Yap
+      </button>
     </div>
   </form>
-  <br>
-  <p>Do you forgot your password? <b><a style="color:white" href="">Click Here</a></b></p>
+  <br />
+  <p>
+    Do you forgot your password?
+    <b><a style="color: white" href="">Click Here</a></b>
+  </p>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "Login",
-  data(){
-    return{
-      email:"",
-      password:"",
-    }
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
   },
-  methods:{
+  methods: {
     ...mapActions({
-      loginCustomer: 'loginCustomer'
+      loginCustomer: "loginCustomer",
     }),
-    customerLogin(){
-      this.loginCustomer({email:this.email,password:this.password}).catch(err=>{
-        console.error("Login is failed",{error:err});
-        const errorMessage= err.response.data?.message||"Giriş başarısız"
-        this.$toast(errorMessage);
-      })
-    }
+    customerLogin() {
+      this.loginCustomer({ email: this.email, password: this.password }).catch(
+        (err) => {
+          console.error("Login is failed", { error: err });
+          const errorMessage = err.response.data?.message || "Giriş başarısız";
+          this.$toast(errorMessage);
+        }
+      );
+    },
   },
   mounted() {
-    console.log("hello world 22222")
-  }
-}
+    console.log("hello world 22222");
+  },
+};
 </script>
 
 <style scoped>
@@ -62,14 +87,14 @@ export default {
   background-color: rgba(255, 255, 255, 0.15);
   color: darkred;
   position: relative;
-
 }
 
 .inputs:hover {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-.lbl-user, .lbl-password {
+.lbl-user,
+.lbl-password {
   color: white;
   font-size: 1.5rem;
   position: absolute;
@@ -95,7 +120,8 @@ export default {
   color: darkred;
 }
 
-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+input::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
   color: rgba(255, 255, 255, 0.747);
 }
 </style>
