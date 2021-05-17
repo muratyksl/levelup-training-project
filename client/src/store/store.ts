@@ -2,8 +2,14 @@ import { State } from "vue";
 import { createStore } from "vuex";
 
 import { router } from "../router";
-import { ICustomerPayload, ILoginInfo } from "../types/customerTypes";
+import {
+  ICustomer,
+  ICustomerd,
+  ICustomerPayload,
+  ILoginInfo,
+} from "../types/customerTypes";
 import { doCustomerLogin, registerCustomer } from "../api/authCustomer";
+import { setAuthCustomer, setAuthToken } from "../utils/persistentStorage";
 
 // Create a new store instance.
 export const store = createStore({
@@ -23,8 +29,10 @@ export const store = createStore({
     };
   },
   mutations: {
-    LOGIN_CUSTOMER: (state: State, payload) => {
+    LOGIN_CUSTOMER: (state: State, payload: ICustomer) => {
       state.authCustomer = payload;
+      setAuthToken("customer");
+      setAuthCustomer(payload);
     },
   },
   actions: {
