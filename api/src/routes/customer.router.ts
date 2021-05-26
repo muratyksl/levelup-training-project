@@ -8,6 +8,12 @@ const router = express.Router();
 router.post("/register", async (req, res, next) => {
   const controller = new CustomerController();
   const response = await controller.createCustomer(req.body).catch(next);
+  if (!response) return res.status(404).send({ message: "Customer not found" });
+  if (!(req.session && response))
+    return res.status(401).send({ message: "Auth failed" });
+  req.session.email = response.email;
+  req.session.dbID = response.id;
+  req.session.role = "customer";
   return res.send(response);
 });
 
@@ -20,11 +26,21 @@ router.post("/login", async (req, res, next) => {
   if (!(req.session && response))
     return res.status(401).send({ message: "Auth failed" });
   req.session.email = response.email;
+  req.session.dbID = response.id;
   req.session.role = "customer";
   return res.send(response);
 });
 
 router.use(getAuth);
+
+// router.put("/:id", checkRole("admin", true), async (req, res, next) => {
+//   const controller = new CustomerController();
+//   const response = await controller
+//     .updateCustomer(req.params.id, req.body)
+//     .catch(next);
+//   if (!response) res.status(404).send({ message: "Updating Failed" });
+//   return res.send(response);
+// });
 
 router.get("/:id", checkRole("trainer"), async (req, res, next) => {
   const controller = new CustomerController();

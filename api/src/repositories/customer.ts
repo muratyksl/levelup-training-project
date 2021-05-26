@@ -38,6 +38,20 @@ export const getCustomer = async (id: number): Promise<Customer | null> => {
   return customer;
 };
 
+// export const updateCustomer = async (
+//   id: number,
+//   fields: ICustomerUpdate
+// ): Promise<Customer | null> => {
+//   const customerRepository = getRepository(Customer);
+//   const customer = await customerRepository.findOne({ id });
+//   if (!customer) return null;
+//   await customerRepository.save({
+//     ...fields,
+//     ...customer,
+//   });
+//   return customer;
+// };
+
 export const authenticateCustomer = async (
   email: string,
   password: string

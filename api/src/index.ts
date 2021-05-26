@@ -21,6 +21,7 @@ const redisClient = redis.createClient({ host: process.env.REDIS_HOST });
 
 declare module "express-session" {
   interface Session {
+    dbID: number;
     email: string;
     role: "admin" | "trainer" | "customer";
   }

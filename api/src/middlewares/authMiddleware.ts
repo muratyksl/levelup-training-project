@@ -9,13 +9,16 @@ export const getAuth = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
-export const checkRole = (role: "admin" | "trainer" | "customer") => async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const checkRole = (
+  role: "admin" | "trainer" | "customer",
+  isHimself = false
+) => async (req: Request, res: Response, next: NextFunction) => {
   const authRole = req.session.role;
+  const authID = String(req.session.dbID);
   if (authRole === "admin") {
+    return next();
+  }
+  if (isHimself && req.params.id === authID) {
     return next();
   }
   if (authRole !== role) {

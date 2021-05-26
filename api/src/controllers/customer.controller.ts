@@ -1,4 +1,4 @@
-import { Get, Route, Tags, Post, Body, Path } from "tsoa";
+import { Get, Route, Tags, Post, Body, Path, Put } from "tsoa";
 
 import { Customer } from "../models";
 import { ILoginInfo } from "./trainer.controller";
@@ -17,6 +17,14 @@ export default class CustomerController {
   public async getCustomer(@Path() id: string): Promise<Customer | null> {
     return getCustomer(Number(id));
   }
+
+  // @Put(":id")
+  // public async updateCustomer(
+  //   @Path() id: string,
+  //   @Body() body: ICustomerUpdate
+  // ): Promise<Customer | null> {
+  //   return updateCustomer(Number(id), body);
+  // }
 
   @Get("/")
   public async getCustomers(): Promise<Array<Customer>> {
