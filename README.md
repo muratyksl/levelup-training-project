@@ -11,3 +11,4 @@ Find best trainer for you with levelup
 - postgresql
 - typeOrm
 - redis
+- vue.js
