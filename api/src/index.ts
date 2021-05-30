@@ -12,6 +12,7 @@ import Router from "./routes";
 import dbConfig from "./config/database";
 import { errorHandlerMiddleWare } from "./middlewares/errorHandler";
 
+export const IsProduction = process.env.node_env === "production";
 const PORT = process.env.PORT || 8000;
 
 const app: Application = express();
@@ -28,7 +29,7 @@ declare module "express-session" {
 }
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: IsProduction ? "https://levelupgym.tk" : "http://localhost:3000",
     credentials: true,
   })
 );
@@ -58,7 +59,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24, // one day
       httpOnly: true,
       sameSite: "lax",
-      secure: false, //cookie only work in https if true
+      secure: IsProduction, //cookie only work in https if true
     },
     secret: "sdfaepjfgopsdjfiopdsjiofds",
     resave: false,
