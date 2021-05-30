@@ -10,7 +10,7 @@ services:
   app:
     build:
       context: api
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     volumes:
       - ./api/src:/app/src
     ports:
