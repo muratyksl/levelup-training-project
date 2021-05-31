@@ -12,7 +12,7 @@ import Router from "./routes";
 import dbConfig from "./config/database";
 import { errorHandlerMiddleWare } from "./middlewares/errorHandler";
 
-export const IsProduction = process.env.node_env === "production";
+export const IsProduction = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 8000;
 
 const app: Application = express();
