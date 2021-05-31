@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiAddress =
   import.meta.env.MODE === "production"
-    ? "https://api.levelup.tk"
+    ? "https://api.levelupgym.tk"
     : "http://localhost:8000";
 
 const request = axios.create({
