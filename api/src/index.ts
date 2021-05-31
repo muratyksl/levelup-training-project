@@ -30,7 +30,7 @@ declare module "express-session" {
 app.use(
   cors({
     origin: IsProduction
-      ? "https://api.levelupgym.tk"
+      ? ["https://levelupgym.tk", "https://www.levelupgym.tk"]
       : "http://localhost:3000",
     credentials: true,
   })
