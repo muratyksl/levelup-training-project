@@ -29,7 +29,9 @@ declare module "express-session" {
 }
 app.use(
   cors({
-    origin: IsProduction ? "https://levelupgym.tk" : "http://localhost:3000",
+    origin: IsProduction
+      ? "https://api.levelupgym.tk"
+      : "http://localhost:3000",
     credentials: true,
   })
 );
