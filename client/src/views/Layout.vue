@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import { getAllCustomers } from "../api/customer";
 import { Layout, Menu, Button } from "ant-design-vue";
 import {
   UserOutlined,

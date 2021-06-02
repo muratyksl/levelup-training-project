@@ -308,7 +308,7 @@
 </template>
 
 <script>
-import { Collapse, Descriptions, List } from "ant-design-vue";
+import { Avatar, Collapse, Descriptions, List } from "ant-design-vue";
 
 export default {
   name: "Program",
@@ -320,6 +320,7 @@ export default {
     aList: List,
     aListItem: List.Item,
     aListItemMeta: List.Item.Meta,
+    aAvatar: Avatar,
   },
   data() {
     return {
