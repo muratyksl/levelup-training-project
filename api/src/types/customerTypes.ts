@@ -1,4 +1,4 @@
-interface ICustomerUpdate {
+export interface ICustomerUpdate {
   email: string;
   firstName: string;
   lastName: string;

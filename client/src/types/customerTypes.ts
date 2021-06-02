@@ -20,3 +20,10 @@ export interface ICustomerPayload {
   weight?: number;
   trainerId?: number | null;
 }
+export interface ICustomerUpdate {
+  email: string;
+  firstName: string;
+  lastName: string;
+  height: number;
+  weight: number;
+}

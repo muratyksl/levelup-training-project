@@ -10,7 +10,7 @@ export const getAuthToken = () => {
   return Cookies.get("Auth");
 };
 
-export const removeAuthToken = (role: IRole) => {
+export const removeAuthToken = () => {
   Cookies.remove("Auth");
 };
 
@@ -22,6 +22,7 @@ export const setAuthCustomer = (authCustomer: ICustomer) => {
 export const getAuthCustomer = (): ICustomer | null => {
   const customer = localStorage.getItem("customer");
   if (!customer) return null;
+  console.log("get auth customer ", JSON.parse(customer));
   return JSON.parse(customer);
 };
 

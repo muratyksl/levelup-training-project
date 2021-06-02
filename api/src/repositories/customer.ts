@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { Customer } from "../models";
 import { comparePassword, hashPassword } from "../utils/hashingUtils";
+import { ICustomerUpdate } from "../types/customerTypes";
 
 export interface ICustomerPayload {
   firstName: string;
@@ -38,19 +39,19 @@ export const getCustomer = async (id: number): Promise<Customer | null> => {
   return customer;
 };
 
-// export const updateCustomer = async (
-//   id: number,
-//   fields: ICustomerUpdate
-// ): Promise<Customer | null> => {
-//   const customerRepository = getRepository(Customer);
-//   const customer = await customerRepository.findOne({ id });
-//   if (!customer) return null;
-//   await customerRepository.save({
-//     ...fields,
-//     ...customer,
-//   });
-//   return customer;
-// };
+export const updateCustomer = async (
+  id: number,
+  fields: ICustomerUpdate
+): Promise<Customer | null> => {
+  const customerRepository = getRepository(Customer);
+  const customer = await customerRepository.findOne({ id });
+  if (!customer) return null;
+  await customerRepository.save({
+    ...customer,
+    ...fields,
+  });
+  return customer;
+};
 
 export const authenticateCustomer = async (
   email: string,

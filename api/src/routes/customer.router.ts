@@ -33,14 +33,15 @@ router.post("/login", async (req, res, next) => {
 
 router.use(getAuth);
 
-// router.put("/:id", checkRole("admin", true), async (req, res, next) => {
-//   const controller = new CustomerController();
-//   const response = await controller
-//     .updateCustomer(req.params.id, req.body)
-//     .catch(next);
-//   if (!response) res.status(404).send({ message: "Updating Failed" });
-//   return res.send(response);
-// });
+router.put("/:id", checkRole("admin", true), async (req, res, next) => {
+  const controller = new CustomerController();
+  const response = await controller
+    .updateCustomer(req.params.id, req.body)
+    .catch(next);
+
+  if (!response) res.status(404).send({ message: "Updating Failed" });
+  return res.send(response);
+});
 
 router.get("/:id", checkRole("trainer"), async (req, res, next) => {
   const controller = new CustomerController();

@@ -3,23 +3,40 @@
     <a-layout-slider v-model="collapsed" collapsible>
       <div class="logo" />
       <a-menu theme="dark" mode="inline" v-model="selectedKeys">
-        <a-menu-item key="1">
-          <user-outlined />
-          <span>nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <video-camera-outlined />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <upload-outlined />
-          <span>nav 3</span>
-        </a-menu-item>
+        <router-link to="/profile">
+          <a-menu-item key="1">
+            <user-outlined />
+            <span>Profile</span>
+          </a-menu-item>
+        </router-link>
+        <router-link to="/program">
+          <a-menu-item key="2">
+            <video-camera-outlined />
+            <span>Programım</span>
+          </a-menu-item>
+        </router-link>
+        <router-link to="/profile">
+          <a-menu-item key="3">
+            <upload-outlined />
+            <span>nav 3</span>
+          </a-menu-item>
+        </router-link>
       </a-menu>
     </a-layout-slider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <div>HEllo header</div>
+      <a-layout-header class="layout-header">
+        <h1
+          style="margin-left: 15px; font-weight: 500"
+          class="layout-header-title"
+        >
+          Level-Up Online Fitness Platformu
+        </h1>
+        <a-button type="danger" shape="round" @click="logOutCustomer">
+          <template #icon>
+            <LogoutOutlined />
+            Çıkış Yap
+          </template>
+        </a-button>
       </a-layout-header>
       <a-layout-content
         :style="{
@@ -29,7 +46,7 @@
           minHeight: '280px',
         }"
       >
-        Content
+        <router-view></router-view>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -37,14 +54,16 @@
 
 <script>
 import { getAllCustomers } from "../api/customer";
-import { Layout, Menu } from "ant-design-vue";
+import { Layout, Menu, Button } from "ant-design-vue";
 import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons-vue";
+import { mapActions } from "vuex";
 export default {
   name: "Layout",
   data() {
@@ -59,27 +78,19 @@ export default {
     UploadOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
+    LogoutOutlined,
     aLayout: Layout,
     aLayoutSlider: Layout.Sider,
     aLayoutHeader: Layout.Header,
     aLayoutContent: Layout.Content,
     aMenu: Menu,
     aMenuItem: Menu.Item,
+    aButton: Button,
   },
   methods: {
-    getAll() {
-      getAllCustomers()
-        .then((res) => {
-          const customers = res.data;
-          console.log("All Customers: ", { customers: customers });
-        })
-        .catch((err) => {
-          console.log("get all customers unsuccesfull");
-        });
-    },
-  },
-  mounted() {
-    this.getAll();
+    ...mapActions({
+      logOutCustomer: "logOutCustomer",
+    }),
   },
 };
 </script>
@@ -105,5 +116,17 @@ export default {
 
 .site-layout .site-layout-background {
   background: #fff;
+}
+.layout-header {
+  background-color: #fff !important;
+  padding: 0;
+  margin: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.layout-header-title {
+  margin-left: 15px;
+  font-weight: 500;
 }
 </style>

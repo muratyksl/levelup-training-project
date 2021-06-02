@@ -9,6 +9,8 @@ import AuthPage from "./views/Pages/AuthPage.vue";
 import Login from "./components/Login.vue";
 import AdminLogin from "./components/AdminLogin.vue";
 import Register from "./components/Register.vue";
+import Profile from "./views/Pages/Profile.vue";
+import Program from "./views/Pages/Program.vue";
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -35,6 +37,16 @@ const routes = [
   {
     path: "/",
     component: Layout,
+    children: [
+      {
+        path: "profile",
+        component: Profile,
+      },
+      {
+        path: "program",
+        component: Program,
+      },
+    ],
   },
 ];
 

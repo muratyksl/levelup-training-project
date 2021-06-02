@@ -8,7 +8,9 @@ import {
   ICustomerPayload,
   getCustomers,
   authenticateCustomer,
+  updateCustomer,
 } from "../repositories/customer";
+import { ICustomerUpdate } from "../types/customerTypes";
 
 @Route("customers")
 @Tags("Customer")
@@ -18,13 +20,13 @@ export default class CustomerController {
     return getCustomer(Number(id));
   }
 
-  // @Put(":id")
-  // public async updateCustomer(
-  //   @Path() id: string,
-  //   @Body() body: ICustomerUpdate
-  // ): Promise<Customer | null> {
-  //   return updateCustomer(Number(id), body);
-  // }
+  @Put(":id")
+  public async updateCustomer(
+    @Path() id: string,
+    @Body() body: ICustomerUpdate
+  ): Promise<Customer | null> {
+    return updateCustomer(Number(id), body);
+  }
 
   @Get("/")
   public async getCustomers(): Promise<Array<Customer>> {
