@@ -2,6 +2,7 @@ import express from "express";
 
 import CustomerController from "../controllers/customer.controller";
 import { checkRole, getAuth } from "../middlewares/authMiddleware";
+import { addTrainer } from "../repositories/customer";
 
 const router = express.Router();
 
@@ -32,6 +33,14 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.use(getAuth);
+
+router.post("/addTrainer", checkRole("customer"), async (req, res, next) => {
+  const { id, trainerId } = req.query;
+  console.log("addTrainer ", { id: Number(id), trainerId: Number(trainerId) });
+  const response = await addTrainer(Number(id), Number(trainerId));
+  if (!response) return res.status(404).send({ message: "failed" });
+  return res.send(response);
+});
 
 router.put("/:id", checkRole("admin", true), async (req, res, next) => {
   const controller = new CustomerController();

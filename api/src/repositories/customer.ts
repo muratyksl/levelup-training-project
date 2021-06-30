@@ -1,5 +1,5 @@
 import { getRepository } from "typeorm";
-import { Customer } from "../models";
+import { Customer, Trainer } from "../models";
 import { comparePassword, hashPassword } from "../utils/hashingUtils";
 import { ICustomerUpdate } from "../types/customerTypes";
 
@@ -50,6 +50,21 @@ export const updateCustomer = async (
     ...customer,
     ...fields,
   });
+  return customer;
+};
+
+export const addTrainer = async (
+  id: number,
+  trainerId: number
+): Promise<Customer | null> => {
+  const trainerRepository = getRepository(Trainer);
+  const trainer = await trainerRepository.findOne({ id: trainerId });
+  const customerRepository = getRepository(Customer);
+  const customer = await customerRepository.findOne({ id });
+  if (!(customer && trainer)) return null;
+  customer.trainer = trainer;
+  customer.trainerId = trainerId;
+  await customerRepository.save(customer);
   return customer;
 };
 
