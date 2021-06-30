@@ -328,12 +328,10 @@
         <div v-for="trainer in trainers">
           <a-list-item>
             <template #actions>
-              <a-button @click="addTrainer(trainer.id)">
-                Öneri İste
-              </a-button>
+              <a-button @click="addTrainer(trainer.id)"> Öneri İste </a-button>
             </template>
             <a-list-item-meta
-              :description="`${trainer.name} ${trainer.lastName} `"
+              :description="`${trainer.firstName} ${trainer.lastName} `"
             >
               <template #title>
                 <a href="https://www.antdv.com/">{{ trainer.username }}</a>
@@ -360,7 +358,7 @@ import {
   List,
   Result,
 } from "ant-design-vue";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import axios from "axios";
 import request from "../../utils/request";
 
@@ -400,20 +398,25 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      updateCustomer: "updateCustomer",
+    }),
     handleOk() {
       this.modalVisible = false;
     },
     async getTrainers() {
-      const trainers = await request.get(`/customers/`);
+      const trainers = await request.get(`/trainers`);
       this.trainers = trainers.data;
     },
     async openModal() {
       await this.getTrainers();
       this.modalVisible = true;
     },
-    addTrainer(trainerId){
-
-    }
+    async addTrainer(trainerId) {
+      await request.post(`/customers/addTrainer`, _, {
+        params: { id: this.authCustomer.id, trainerId: trainerId },
+      });
+    },
   },
   computed: {
     ...mapState({
